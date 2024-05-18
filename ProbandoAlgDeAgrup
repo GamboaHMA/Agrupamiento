@@ -1,0 +1,116 @@
+from matplotlib import pyplot as plt
+import numpy as np
+import Clustering
+from Methods import Methods
+from Clustering import Clustering
+from Structs import Point
+import random
+
+# Crear puntos aleatorios para tres grupos
+#point1 = [('x',0.1), ('y',0.1)]
+#point2 = [('x',0.2), ('y',0.1)]
+#point3 = [('x',0.3), ('y',0.1)]
+#point4 = [('x',0.85), ('y',0.4)]
+#point5 = [('x',0.7), ('y',0.4)]
+#point6 = [('x',0.4), ('y',0.7)]
+
+point1 = [('x',0.1), ('y',0.1)]
+point2 = [('x',0.5), ('y',0.5)]
+point3 = [('x',0.2), ('y',0.5)]
+point4 = [('x',0.1), ('y',0.8)]
+point5 = [('x',0.8), ('y',0.8)]
+point6 = [('x',0.8), ('y',0.2)]
+
+#point7 =  [('x',0.1), ('y',0.35)]
+#point8 =  [('x',0.2), ('y',0.35)]
+#point9 =  [('x',0.3), ('y',0.35)]
+#point10 = [('x',0.4), ('y',0.35)]
+#point11 = [('x',0.5), ('y',0.35)]
+#point12 = [('x',0.6), ('y',0.35)]
+
+#point13 =  [('x',0.1), ('y',0.6)]
+#point14 =  [('x',0.2), ('y',0.6)]
+#point15 =  [('x',0.3), ('y',0.6)]
+#point16 = [('x',0.4), ('y',0.6)]
+#point17 = [('x',0.5), ('y',0.6)]
+#point18 = [('x',0.6), ('y',0.6)]
+
+point19 = [('x', 0.5),('y', 0.5)]
+
+group1 = Methods.GeneratePointsAroundTo(point1, 30, 0.06)
+group2 = Methods.GeneratePointsAroundTo(point2, 30, 0.06)
+group3 = Methods.GeneratePointsAroundTo(point3, 30, 0.06)
+group4 = Methods.GeneratePointsAroundTo(point4, 30, 0.06)
+group5 = Methods.GeneratePointsAroundTo(point5, 30, 0.06)
+group6 = Methods.GeneratePointsAroundTo(point6, 30, 0.06)
+
+#group7 = Methods.GeneratePointsAroundTo(point7, 20, 0.06)
+#group8 = Methods.GeneratePointsAroundTo(point8, 20, 0.06)
+#group9 = Methods.GeneratePointsAroundTo(point9, 20, 0.06)
+#group10 = Methods.GeneratePointsAroundTo(point10,20, 0.06)
+#group11 = Methods.GeneratePointsAroundTo(point11,20, 0.06)
+#group12 = Methods.GeneratePointsAroundTo(point12,20, 0.06)
+
+#group13 = Methods.GeneratePointsAroundTo(point13, 20, 0.06)
+#group14 = Methods.GeneratePointsAroundTo(point14, 20, 0.06)
+#group15 = Methods.GeneratePointsAroundTo(point15, 20, 0.06)
+#group16 = Methods.GeneratePointsAroundTo(point16,20, 0.06)
+#group17 = Methods.GeneratePointsAroundTo(point17,20, 0.06)
+#group18 = Methods.GeneratePointsAroundTo(point18,20, 0.06)
+
+#group19 = Methods.GeneratePointsAroundTo(point19, 8, 0.5)
+
+points = group1+group2+group3+group4+group5+group6#+group19#group7+group8+group9+group10+group11+group12+group13+group14+group15+group16+group17+group18+group19
+
+#points.append(Point([('x',0), ('y',0)]))
+#points.append(Point([('x',1), ('y',1)]))
+
+for i in range(4):
+     
+    clusters_ = Clustering.Agrupa(points, 4+i, "kmeans", 5)
+    clusters = clusters_[0]
+    for i in range(len(clusters)):   #aniadir el -1 para no colorear el ultimo grupo
+        x = []
+        y = []
+        for j in range(len(clusters[i])):
+            values = list(clusters[i][j].propiedades.values())
+            x.append(values[0])
+            y.append(values[1])
+        plt.scatter(x, y, color=Methods.GetRandomColor(), s=10)
+
+    x = []
+    y = []
+    for i in range(len(clusters[len(clusters) - 1])):
+        values = list(clusters[len(clusters) - 1][i].propiedades.values())
+        x.append(values[0])
+        y.append(values[1])
+    #plt.scatter(x, y, color='red', s=10)
+
+    plt.show()
+    print('pause')
+
+#for point in points:
+#     delattr(point, 'type')
+
+#clusters = Clustering.DBSCAN(points, 20, 0.2)
+
+#for i in range(len(clusters) - 1):
+#    x = []
+#    y = []
+#    for j in range(len(clusters[i])):
+#        values = list(clusters[i][j].propiedades.values())
+#        x.append(values[0])
+#        y.append(values[1])
+#    plt.scatter(x, y, color=Methods.GetRandomColor(), s=10)
+
+#x = []
+#y = []
+#for i in range(len(clusters[len(clusters) - 1])):
+#        values = list(clusters[len(clusters) - 1][i].propiedades.values())
+#        x.append(values[0])
+#        y.append(values[1])
+#plt.scatter(x, y, color='red', s=10)
+
+#plt.show()
+
+print('hello')
